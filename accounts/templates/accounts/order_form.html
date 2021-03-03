@@ -1,0 +1,27 @@
+{% extends 'accounts/main.html' %}
+<!-- Template tags for block content from django python-->
+{% load static %} 
+{% block content%}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+            
+            <!-- we want to send this as post data-->
+            <form action="" method="POST">
+                <!-- way of sending data securely-->
+                {% csrf_token %}
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    {{form}}
+                    <hr>
+                {% endfor %}
+                <!-- name of input -->
+                <input type="submit" name="Submit">
+                <!-- this submit button will send data-->
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

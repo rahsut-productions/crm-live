@@ -1,0 +1,36 @@
+{% extends 'accounts/main.html' %} <!-- we tell this file to get roots from the main.html file template -->
+
+{% block content %}
+<!-- All the content we want in the child template will be in here -->
+
+<!-- A table which will output some products-->
+<br>
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <h5>Products</h5>
+            </div>
+            <div class="card card-body">
+                <table class="table">
+                    <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                    </tr>
+                    <!-- Curley braces so we can write Python code-->
+                    <!--% signs allows us to write logic like for loops or if statements, et cetera -->
+                    {% for i in products  %}
+                        <tr> <!-- <tr> is used because we want new table iteration to be created each time-->
+                            <td>{{i.name}}</td> <!-- Double curley braces allow us to write data in Python code like variables, et cetera. -->
+                            <td>{{i.category}}</td> <!-- Double curley braces allow us to write data in Python code like variables, et cetera. -->
+                            <td>{{i.price}}</td> <!-- Double curley braces allow us to write data in Python code like variables, et cetera. -->
+
+                        </tr>    
+                    {% endfor %} <!-- Closes for loop-->
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+{% endblock %}

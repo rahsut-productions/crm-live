@@ -1,0 +1,68 @@
+{% extends 'accounts/main.html' %} <!-- we tell this file to get roots from the main.html file template -->
+
+{% block content %}
+
+{% include 'accounts/status.html' %} <!-- basically means include section from navbar.html here-->
+
+
+<!-- All the content we want in the child template will be in here -->
+<br>
+
+<div class="row"> 
+    <div class="col-md-5"> <!-- This says to take up 5/12 content blocks-->
+        <h5>CUSTOMERS:</h5>
+        <hr>
+        <div class="card card-body"> <!-- This is where the styling happens-->
+            <!-- in the card we place our buttons-->
+            <!-- button for creating customer-->
+            <a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a>
+            <table class="table table-sm"> <!-- Table which will hold customers and orders-->
+                <tr>
+                    <th>Customer</th>
+                    <th>Phone</th>
+                </tr>
+            {% for customer in customers %}
+                <tr>
+                    <!-- this creates a view button so you can view each customer's customer page-->
+                    <td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
+                    <td>{{customer.name}}</td>
+                    <td>{{customer.phone}}</td>
+                </tr>   
+            {% endfor %}
+        </table>
+    </div>
+ </div>
+
+ <div class="col-md-7">
+    <h5>LAST 5 ORDERS</h5>
+    <hr>
+    <div class="card card-body">
+        <table class="table table-sm">
+            <tr>
+                <th>Product</th>
+                <th>Date Ordered</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>Remove</th>
+            </tr>
+        {% for order in orders %}
+        <!-- This all happens 3 times becasue there are three orders in total-->
+            <tr>
+                <td>{{order.product}}</td>
+                <td>{{order.date_created}}</td>
+                <td>{{order.status}}</td>
+                <!-- update_order is marked in urls.py of accounts folder
+                We pass in ID so we know which customer for-->
+                <td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+                <td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+            </tr>   
+        {% endfor %}
+        </table>
+    </div>
+ </div>
+
+</div>
+
+
+
+{% endblock %}

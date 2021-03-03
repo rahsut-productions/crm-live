@@ -1,0 +1,90 @@
+{% extends 'accounts/main.html' %} <!-- we tell this file to get roots from the main.html file template -->
+
+{% block content %}
+<!-- All the content we want in the child template will be in here -->
+<br>
+
+<!-- This first row is for the "Customer:", "Contact Information", and "Total Orders"columns-->
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Customer:</h5>
+			<hr>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update Customer</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_order' customer.id %}">Place Order</a>
+
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Contact Information</h5>
+			<hr> <!-- gets it from views.py -->
+			<p>Email: {{customer.email}}</p>
+			<p>Phone: {{customer.phone}}</p>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Total Orders</h5>
+			<hr>
+			<h1 style="text-align: center;padding: 10px">{{orders.count}}</h1>
+		</div>
+	</div>
+</div>
+
+
+<br>
+<!-- The second row is for the Search bar-->
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+				{{myFilter.form}}
+
+		    <button class="btn btn-primary" type="submit">Search</button>
+		  </form>
+		</div>
+	</div>
+	
+</div>
+<br>
+<!-- The third row is for the "Product", "Category", "Date Ordered", etc.-->
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Note</th>
+					<th>Date Ordered</th>
+					<th>Status</th>
+					<th>Update</th>
+					<th>Remove</th>
+				</tr>
+				{% for order in orders %}
+				<tr>
+					<!-- Goes inside orders, then into product function, then what ever else in function-->
+					<td>{{order.product}}</td> 
+					<td>{{order.note	}}</td>
+					<td>{{order.date_created}}</td>
+					<td>{{order.status}}</td>
+					<!-- class is sort of like import in python-->
+					<!-- btn means button. btn-sm means small button
+					and btn-info is used becasue this button updates
+					something. btn-danger is used because we're 
+					removing something. Though, you don't have to put
+					it for removing or adding something. It just depends
+					on what you want. -->
+					<td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+                	<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+
+				</tr>	
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

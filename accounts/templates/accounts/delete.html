@@ -1,0 +1,29 @@
+{% extends 'accounts/main.html'%}
+<!-- Template tags for block content from django python-->
+{% load static %} 
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+
+            <p>Are you sure you want to delete "{{item}}"?</p>
+            <!-- Sending confirmation or sending back to page coming
+            from requires POST method-->
+            <form action="{% url 'delete_order' item.id %}"method="POST">
+                <!-- Needed to make the actual delete process work-->
+                {% csrf_token %}
+
+                <a class="btn btn-warning" href="{% url 'home' %}">Cancel</a>
+                <!-- A button for 'are you sure you want to 
+                do this?'-->
+                <input class="btn btn-danger" type="submit" name="Confirm">
+            </form>
+        </div>
+    </div>
+</div>
+
+        
+
+{% endblock %}

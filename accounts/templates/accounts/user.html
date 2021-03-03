@@ -1,0 +1,36 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+{% include 'accounts/status.html' %}
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Note</th>
+					<th>Date Ordered</th>
+					<th>Status</th>
+				</tr>
+				{% for order in orders %}
+				<tr>
+					<!-- Goes inside orders, then into product function, then what ever else in function-->
+					<td>{{order.product}}</td> 
+					<td>{{order.note}}</td>
+					<td>{{order.date_created}}</td>
+					<td>{{order.status}}</td>
+					<!-- class is sort of like import in python-->
+					<!-- btn means button. btn-sm means small button
+					and btn-info is used becasue this button updates
+					something. btn-danger is used because we're 
+					removing something. Though, you don't have to put
+					it for removing or adding something. It just depends
+					on what you want. -->
+				</tr>	
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
