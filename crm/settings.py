@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import django-heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -198,3 +199,5 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage' # instead of lo
 # MAKE SURE TO PIP INSTALL THIS (pip install django-storages) allows us to work with backend and lets us setup static files. chceck docs for more info
 # after that MAKE SURE TO PIP INSTALL THIS AS WELL (pip install boto3) allows us to work with s3 buckets and more specific things, check docs for more info. it seems
 # as if boto3 gets downloaded after you download previous pip install of django-storages
+
+django_heroku.settings(locals())
